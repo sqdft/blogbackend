@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: comments-backend
+    runtime: python
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: CORS_ORIGINS
+        value: "https://your-domain.com,https://your-preview.vercel.app"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    autoDeploy: true
